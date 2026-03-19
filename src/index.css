@@ -1,0 +1,5 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;}
+.sidebar-gradient{background:linear-gradient(180deg,#111827 0%,#0d1b2a 100%);}
