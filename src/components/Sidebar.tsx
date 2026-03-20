@@ -25,35 +25,27 @@ export default function Sidebar({ onLogout }: { onLogout: () => void }) {
         {open ? <X size={18} /> : <Menu size={18} />}
       </button>
 
-      <aside
-        style={{ fontFamily: "'Roboto', sans-serif", minHeight: '100vh', width: open ? 288 : 80, background: '#0d1b2a', color: 'white', display: 'flex', flexDirection: 'column', transition: 'width 0.3s', overflow: 'hidden', borderRight: '1px solid rgba(255,255,255,0.05)' }}
-      >
-        <div style={{ padding: '20px 16px', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
-          <img
-            src={ENEL_LOGO}
-            alt="Enel Chile"
-            style={{ height: 36, width: 'auto', objectFit: 'contain', filter: 'brightness(0) invert(1)', display: 'block' }}
-          />
+      <aside className={`${open ? 'w-72' : 'w-0 md:w-20'} bg-[#0d1b2a] text-white flex flex-col transition-all duration-300 min-h-screen overflow-hidden border-r border-white/5`}>
+        <div className="px-4 py-5 border-b border-white/10">
+          <img src={ENEL_LOGO} alt="Enel Chile" className="h-9 w-auto object-contain" style={{ filter: 'brightness(0) invert(1)' }} />
           {open && (
-            <div style={{ marginTop: 12 }}>
-              <p style={{ margin: 0, color: 'white', fontWeight: 700, fontSize: 15 }}>EnergyCore</p>
-              <p style={{ margin: 0, color: '#94a3b8', fontSize: 11, marginTop: 2 }}>El n\u00facleo inteligente del suministro energ\u00e9tico</p>
+            <div className="mt-3">
+              <p className="text-white font-bold text-sm">EnergyCore</p>
+              <p className="text-gray-400 text-xs mt-0.5">El n\u00facleo inteligente del suministro energ\u00e9tico</p>
             </div>
           )}
         </div>
 
-        <nav style={{ flex: 1, padding: '16px 12px', display: 'flex', flexDirection: 'column', gap: 4 }}>
+        <nav className="flex-1 px-3 py-4 space-y-1">
           {NAV.map(({ key, label, Icon }) => (
             <button
               key={key}
               onClick={() => navigate(key)}
-              style={{
-                width: '100%', display: 'flex', alignItems: 'center', gap: 16,
-                padding: '12px 16px', borderRadius: 12, border: 'none', cursor: 'pointer',
-                fontSize: 14, transition: 'all 0.2s',
-                background: location.pathname === key ? 'linear-gradient(to right, #2563eb, #60a5fa)' : 'transparent',
-                color: location.pathname === key ? 'white' : '#94a3b8',
-              }}
+              className={`w-full flex items-center gap-4 px-4 py-3 rounded-xl text-sm transition-all ${
+                location.pathname === key
+                  ? 'bg-gradient-to-r from-blue-600 to-blue-400 text-white shadow-lg shadow-blue-900/20'
+                  : 'text-gray-400 hover:bg-white/5 hover:text-white'
+              }`}
             >
               <Icon size={20} />
               {open && <span>{label}</span>}
@@ -61,23 +53,18 @@ export default function Sidebar({ onLogout }: { onLogout: () => void }) {
           ))}
         </nav>
 
-        <div style={{ padding: '16px 12px', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
+        <div className="px-3 py-4 border-t border-white/10">
           <button
             onClick={onLogout}
-            style={{ width: '100%', display: 'flex', alignItems: 'center', gap: 16, padding: '12px 16px', borderRadius: 12, border: 'none', cursor: 'pointer', fontSize: 14, background: 'transparent', color: '#f87171' }}
+            className="w-full flex items-center gap-4 px-4 py-3 rounded-xl text-sm text-red-400 hover:bg-red-500/10 transition-all"
           >
             <LogOut size={20} />
             {open && <span>Cerrar Sesi\u00f3n</span>}
           </button>
-
           {open && (
-            <div style={{ display: 'flex', justifyContent: 'center', paddingTop: 8 }}>
-              <a href="https://www.obix.cl/" target="_blank" rel="noopener noreferrer" title="Desarrollado por Obix">
-                <img
-                  src={OBIX_LOGO}
-                  alt="Obix"
-                  style={{ height: 18, width: 'auto', opacity: 0.5, filter: 'brightness(0) invert(1)' }}
-                />
+            <div className="flex justify-center mt-3">
+              <a href="https://www.obix.cl/" target="_blank" rel="noopener noreferrer">
+                <img src={OBIX_LOGO} alt="Obix" className="h-4 w-auto opacity-40 hover:opacity-100 transition-opacity" style={{ filter: 'brightness(0) invert(1)' }} />
               </a>
             </div>
           )}
