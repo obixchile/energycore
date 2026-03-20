@@ -67,7 +67,78 @@ export default function Login({ onLogin }: Props) {
               <input type="password" value={pw} onChange={e => setPw(e.target.value)} style={{ width: '100%', padding: '11px 14px', borderRadius: 10, border: '1.5px solid #e2e8f0', fontSize: 14, boxSizing: 'border-box', outline: 'none', boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }} placeholder="••••••••" required />
             </div>
             {err && <div style={{ background: '#fef2f2', border: '1px solid #fecaca', borderRadius: 8, padding: '9px 12px', fontSize: 13, color: '#dc2626' }}>{err}</div>}
-            <button type="submit" style={{ width: '100%', padding: '13px', borderRadius: 10, border: 'none', background: 'linear-gradient(135deg,#1d4ed8,#3b82f6)', color: 'white', fontSize: 15, fontWeight: 700, cursor: 'pointer', marginTop: 6, boxShadow: '0 4px 14px rgba(37,99,235,0.4)' }}>Entrar</button>
+<button
+  type="submit"
+  style={{
+    width: '100%',
+    padding: '13px 16px',
+    borderRadius: 999,
+    border: 'none',
+    background: 'linear-gradient(135deg,#1d4ed8,#3b82f6)',
+    color: 'white',
+    fontSize: 15,
+    fontWeight: 700,
+    cursor: 'pointer',
+    marginTop: 6,
+    boxShadow: '0 4px 12px rgba(37,99,235,0.5)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 8,
+    transition: 'transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease',
+  }}
+  onMouseEnter={e => {
+    (e.currentTarget as HTMLButtonElement).style.background =
+      'linear-gradient(135deg,#2563eb,#60a5fa)'
+    ;(e.currentTarget as HTMLButtonElement).style.boxShadow =
+      '0 6px 16px rgba(37,99,235,0.6)'
+    ;(e.currentTarget as HTMLButtonElement).style.transform = 'translateY(-1px)'
+  }}
+  onMouseLeave={e => {
+    (e.currentTarget as HTMLButtonElement).style.background =
+      'linear-gradient(135deg,#1d4ed8,#3b82f6)'
+    ;(e.currentTarget as HTMLButtonElement).style.boxShadow =
+      '0 4px 12px rgba(37,99,235,0.5)'
+    ;(e.currentTarget as HTMLButtonElement).style.transform = 'translateY(0)'
+  }}
+>
+  <span>Ingresar al sistema</span>
+  <span style={{ display: 'inline-flex', transform: 'translateY(1px)' }}>➜</span>
+</button>
+            <div
+  style={{
+    marginTop: 14,
+    padding: '12px 14px',
+    borderRadius: 12,
+    background: 'rgba(219,234,254,0.85)',
+    border: '1px solid #bfdbfe',
+    display: 'flex',
+    alignItems: 'flex-start',
+    gap: 10,
+    fontSize: 13,
+    color: '#1d4ed8',
+  }}
+>
+  <div
+    style={{
+      width: 22,
+      height: 22,
+      borderRadius: '999px',
+      border: '2px solid #2563eb',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      flexShrink: 0,
+    }}
+  >
+    <span style={{ fontSize: 13, fontWeight: 700, color: '#2563eb' }}>i</span>
+  </div>
+  <div>
+    <div style={{ fontWeight: 700, marginBottom: 4 }}>Modo Demo</div>
+    <div>Email: <span style={{ background: '#e0edff', padding: '0 4px', borderRadius: 4, fontFamily: 'monospace' }}>demo@enel.com</span></div>
+    <div>Password: <span style={{ background: '#e0edff', padding: '0 4px', borderRadius: 4, fontFamily: 'monospace' }}>enel2026</span></div>
+  </div>
+</div>
           </form>
           <p style={{ fontSize: 12, color: '#94a3b8', textAlign: 'center', marginTop: '1.25rem', marginBottom: 0 }}>¿Problemas para acceder? <a href="mailto:soporte@energycore.cl" style={{ color: '#3b82f6', textDecoration: 'none', fontWeight: 600 }}>Contactar soporte</a></p>
         </div>
