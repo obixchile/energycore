@@ -1,4 +1,3 @@
-import React from 'react';
 export default function Configuracion() {
   return (
     <div className="p-6 max-w-2xl font-['Roboto',sans-serif]">

@@ -1,4 +1,3 @@
-import React from 'react';
 import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AppProvider, useApp } from './context/AppContext';
 import Login from './pages/Login';
@@ -21,7 +20,6 @@ function AppInner() {
       <main className="flex-1 overflow-y-auto p-6">
         <Routes>
           <Route path="/" element={<Dashboard />} />
-          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/nueva-propuesta" element={<NuevaPropuesta />} />
           <Route path="/clientes" element={<Clientes />} />
           <Route path="/energia" element={<Energia />} />

@@ -1,8 +1,8 @@
-import React,{useState}from 'react';
-const PRECIOS=[{id:1,troncal:'Troncal Central - Av. Providencia',subestacion:'SE Providencia 220kV',region:'RM',precio:120.50,propuestas:1},{id:2,troncal:'Troncal Oriente - Las Condes',subestacion:'SE Las Condes 110kV',region:'RM',precio:118.30,propuestas:0},{id:3,troncal:'Troncal Sur - Gran Avenida',subestacion:'SE La Cisterna 220kV',region:'RM',precio:115.80,propuestas:0},{id:4,troncal:'Troncal Norte - Conchali',subestacion:'SE Cerro Navia 110kV',region:'RM',precio:114.20,propuestas:0},{id:5,troncal:'Troncal Poniente - Maipu',subestacion:'SE Maipu 220kV',region:'RM',precio:113.50,propuestas:0}];
+import {useState} from 'react';
+import { mockPrecios } from '../data/mockData';
 export default function Energia(){
-const[precios,setPrecios]=useState(PRECIOS);
-const[editando,setEditando]=useState<number|null>(null);
+const[precios,setPrecios]=useState(mockPrecios.map(p=>({...p,precio:p.precioUSD})));
+const[editando,setEditando]=useState<string|null>(null);
 const[editVal,setEditVal]=useState('');
 const promedio=(precios.reduce((a,p)=>a+p.precio,0)/precios.length).toFixed(2);
 return(

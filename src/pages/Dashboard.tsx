@@ -1,6 +1,6 @@
 import React from 'react';
 import { useApp } from '../context/AppContext';
-import { LayoutDashboard, TrendingUp, Users, CheckCircle, ArrowUpRight, Building2 } from 'lucide-react';
+import { LayoutDashboard, TrendingUp, CheckCircle, ArrowUpRight, Building2 } from 'lucide-react';
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   PieChart, Pie, Cell, Legend,

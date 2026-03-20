@@ -1,13 +1,13 @@
-import React,{useState}from 'react';
+import {useState} from 'react';
 import{useApp}from '../context/AppContext';
-import{Plus,Save,ArrowRight,Upload,ChevronRight,FileText,Zap,Shield,BarChart3}from 'lucide-react';
+import{Save,ArrowRight,ChevronRight,FileText,Zap,Shield,BarChart3}from 'lucide-react';
 export default function NuevaPropuesta(){
 const{addPropuesta}=useApp();
 const[step,setStep]=useState(1);
-const[formData,setFormData]=useState({clienteNombre:'',clienteRut:'',clienteEmail:'',clienteTel:'',clienteDireccion:'',sucursales:[{id:1,nombre:'',direccion:'',precioBase:120.5,potencia:500,costoActual:0,troncal:'',subestacion:''}],aniosContrato:3,autogeneracion:false,serviciosExtra:[]});
+const[formData,setFormData]=useState({clienteNombre:'',clienteRut:'',clienteEmail:'',clienteTel:'',clienteDireccion:'',sucursales:[{id:1,nombre:'',direccion:'',precioBase:120.5,potencia:500,costoActual:0,troncal:'',subestacion:''}],aniosContrato:3,autogeneracion:false,serviciosExtras:[] as string[]});
 const extras=[{id:'mantenimiento',label:'Mantenimiento Preventivo',price:500000,icon:<Shield size={18}/>},{id:'monitoreo',label:'Monitoreo 24/7 Power BI',price:300000,icon:<BarChart3 size={18}/>},{id:'eficiencia',label:'Auditoria Eficiencia Energetica',price:1200000,icon:<Zap size={18}/>}];
 const totalGWh=formData.sucursales.reduce((acc,s)=>acc+(Number(s.potencia)*8760*0.6)/1000000,0);
-const totalExtras=formData.serviciosExtra.reduce((acc,id)=>acc+(extras.find(e=>e.id===id)?.price||0),0);
+const totalExtras=formData.serviciosExtras.reduce((acc,id)=>acc+(extras.find(e=>e.id===id)?.price||0),0);
 const handleSave=()=>{
 addPropuesta({...formData,id:Date.now(),estado:'revision_interna',monto:totalExtras,gwh:totalGWh,fechaCreacion:new Date().toLocaleDateString()});
 alert('Propuesta guardada exitosamente');
@@ -34,7 +34,7 @@ return(
    <h3 style={{fontSize:'1.1rem',fontWeight:700,marginBottom:'1.5rem',display:'flex',alignItems:'center',gap:'0.5rem'}}><FileText color='#0033A0'/> Datos del Cliente</h3>
    <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'1rem'}}>
     <div><label style={{fontSize:'0.85rem',fontWeight:600,display:'block',marginBottom:'0.4rem'}}>Razon Social *</label><input style={{width:'100%',padding:'0.75rem',borderRadius:'8px',border:'1px solid #e2e8f0'}} placeholder='Ej: Empresa S.A.' value={formData.clienteNombre} onChange={e=>setFormData({...formData,clienteNombre:e.target.value})}/></div>
-    <div><label style={{fontSize:'0.85rem',fontWeight:600,display:'block',marginBottom:'0.4rem'}}>RUT *</label><input style={{width:'100%',padding:'0.75rem',borderRadius:'8px',border:'1px solid #e2e8f0'}} placeholder='76.123.456-7'/></div>
+    <div><label style={{fontSize:'0.85rem',fontWeight:600,display:'block',marginBottom:'0.4rem'}}>RUT *</label><input style={{width:'100%',padding:'0.75rem',borderRadius:'8px',border:'1px solid #e2e8f0'}} placeholder='76.123.456-7' value={formData.clienteRut} onChange={e=>setFormData({...formData,clienteRut:e.target.value})}/></div>
    </div>
    <h3 style={{fontSize:'1.1rem',fontWeight:700,marginTop:'2rem',marginBottom:'1.5rem',display:'flex',alignItems:'center',justifyContent:'space-between'}}>Datos Tecnicos <button style={{fontSize:'0.85rem',padding:'0.5rem 1rem',background:'#0033A0',color:'white',border:'none',borderRadius:'8px',cursor:'pointer'}}>+ Agregar Sucursal</button></h3>
    {formData.sucursales.map(s=>(
@@ -56,9 +56,9 @@ return(
    <h3 style={{fontSize:'1.1rem',fontWeight:700,marginBottom:'1.5rem'}}>Selecciona Servicios Adicionales</h3>
    {extras.map(e=>(
     <label key={e.id} style={{display:'flex',alignItems:'center',gap:'1rem',padding:'1.25rem',border:'1px solid #e2e8f0',borderRadius:'12px',marginBottom:'1rem',cursor:'pointer'}}>
-     <input type='checkbox' checked={formData.serviciosExtra.includes(e.id)} onChange={()=>{
-      const next=formData.serviciosExtra.includes(e.id)?formData.serviciosExtra.filter(x=>x!==e.id):[...formData.serviciosExtra,e.id];
-      setFormData({...formData,serviciosExtra:next});
+     <input type='checkbox' checked={formData.serviciosExtras.includes(e.id)} onChange={()=>{
+      const next=formData.serviciosExtras.includes(e.id)?formData.serviciosExtras.filter(x=>x!==e.id):[...formData.serviciosExtras,e.id];
+      setFormData({...formData,serviciosExtras:next});
      }} style={{width:20,height:20}}/>
      <div style={{width:40,height:40,background:'#eff6ff',borderRadius:'8px',display:'flex',alignItems:'center',justifyContent:'center',color:'#0033A0'}}>{e.icon}</div>
      <div style={{flex:1}}><p style={{fontWeight:600}}>{e.label}</p><p style={{fontSize:'0.8rem',color:'#64748b'}}>Incluye soporte tecnico y reportes mensuales</p></div>

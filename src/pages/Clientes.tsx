@@ -1,4 +1,4 @@
-import React,{useState}from 'react';
+import {useState} from 'react';
 import{useApp}from '../context/AppContext';
 export default function Clientes(){
 const{propuestas}=useApp();
