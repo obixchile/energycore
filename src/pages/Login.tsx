@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { USUARIOS_DEMO } from '../data/mockData';
 import { Zap, TrendingUp, Info } from 'lucide-react';
 
 const ENEL_LOGO = 'https://www.enel.cl/content/dam/enel-cl/maintenance/LogoEnel-312x114.png';
-const OBIX_LOGO = 'https://www.obix.cl/wp-content/uploads/2021/08/logo-obix.png';
 
 const NOVEDADES = [
   { title: 'Nueva Sección $ Energía', desc: 'Gestión centralizada de precios base con mapa interactivo', icon: Zap, color: '#10b981', bg: '#ecfdf5', date: 'Marzo 2026' },
@@ -17,12 +16,6 @@ export default function Login({ onLogin }: Props) {
   const [email, setEmail] = useState('');
   const [pw, setPw] = useState('');
   const [err, setErr] = useState('');
-  const [currentNews, setCurrentNews] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => { setCurrentNews(prev => (prev + 1) % NOVEDADES.length); }, 4000);
-    return () => clearInterval(interval);
-  }, []);
 
   const handle = (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,77 +24,54 @@ export default function Login({ onLogin }: Props) {
     else setErr('Credenciales incorrectas');
   };
 
-  return (<div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: 'linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%)', fontFamily: "'Roboto', sans-serif", padding: '2rem 1.5rem' }}>
-    <div style={{ maxWidth: 1200, width: '100%', margin: '0 auto', flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3rem', width: '100%', alignItems: 'center' }}>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-          <div style={{ background: 'rgba(255,255,255,0.05)', backdropFilter: 'blur(20px)', borderRadius: 24, border: '1px solid rgba(255,255,255,0.1)', padding: '48px 40px 40px', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
-            <img src={ENEL_LOGO} alt="Enel" style={{ height: 72, marginBottom: 20, filter: 'brightness(0) invert(1)', display: 'block' }} />
-            <h1 style={{ color: 'white', fontSize: 38, fontWeight: 700, margin: '0 0 6px', letterSpacing: '-1px' }}>⚡ EnergyCore</h1>
-            <p style={{ color: '#94a3b8', fontSize: 15, margin: '0 0 36px' }}>El núcleo inteligente del suministro energético</p>
-            <h2 style={{ color: 'white', fontSize: 20, fontWeight: 600, margin: '0 0 24px', alignSelf: 'flex-start' }}>Iniciar Sesión</h2>
-            <form onSubmit={handle} style={{ width: '100%' }}>
-              <div style={{ marginBottom: 16, textAlign: 'left' }}>
-                <label style={{ color: '#94a3b8', fontSize: 13, fontWeight: 500, display: 'block', marginBottom: 6 }}>Email Corporativo</label>
-                <input type="email" value={email} onChange={e => setEmail(e.target.value)} style={{ width: '100%', padding: '14px 18px', borderRadius: 12, border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(255,255,255,0.05)', color: 'white', fontSize: 15, boxSizing: 'border-box', outline: 'none' }} required />
-              </div>
-              <div style={{ marginBottom: 16, textAlign: 'left' }}>
-                <label style={{ color: '#94a3b8', fontSize: 13, fontWeight: 500, display: 'block', marginBottom: 6 }}>Contraseña</label>
-                <input type="password" value={pw} onChange={e => setPw(e.target.value)} style={{ width: '100%', padding: '14px 18px', borderRadius: 12, border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(255,255,255,0.05)', color: 'white', fontSize: 15, boxSizing: 'border-box', outline: 'none' }} required />
-              </div>
-              {err && <p style={{ color: '#f87171', fontSize: 13, margin: '0 0 12px' }}>{err}</p>}
-              <button type="submit" style={{ width: '100%', padding: '16px', borderRadius: 12, border: 'none', background: 'linear-gradient(135deg, #2563eb, #3b82f6)', color: 'white', fontSize: 17, fontWeight: 800, cursor: 'pointer', marginTop: 8, letterSpacing: '0.02em' }}>Entrar</button>
-            </form>
-            <p style={{ color: '#475569', fontSize: 12, marginTop: 24 }}>Modo Demo: demo@enel.com | enel2026</p>
-          </div>
-          <div style={{ textAlign: 'center' }}><span style={{ color: '#94a3b8', fontSize: 14 }}>¿Problemas para acceder? </span><a href="mailto:soporte@energycore.cl" style={{ color: '#60a5fa', fontSize: 14, fontWeight: 600, textDecoration: 'none' }}>Contactar soporte</a></div>
+  return (<div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%)', fontFamily: "'Roboto', sans-serif", padding: '3rem 1.5rem' }}>
+    <div style={{ width: '100%', maxWidth: 640, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2rem' }}>
+      <img src={ENEL_LOGO} alt="Enel" style={{ height: 80, filter: 'brightness(0) invert(1)' }} />
+      <div style={{ width: '100%', background: 'rgba(59,130,246,0.15)', backdropFilter: 'blur(10px)', border: '1px solid rgba(59,130,246,0.3)', borderRadius: 16, padding: '1.5rem', textAlign: 'center' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12, marginBottom: 8 }}>
+          <div style={{ width: 48, height: 48, borderRadius: 12, background: '#3b82f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Zap size={28} color="white" /></div>
+          <h1 style={{ color: 'white', fontSize: 32, fontWeight: 700, margin: 0 }}>EnergyCore</h1>
         </div>
-        <div style={{ background: 'rgba(255,255,255,0.05)', backdropFilter: 'blur(20px)', borderRadius: 24, border: '1px solid rgba(255,255,255,0.1)', padding: '40px 36px', minHeight: 500, display: 'flex', flexDirection: 'column' }}>
-          <div style={{ textAlign: 'center', marginBottom: 32 }}>
-            <h2 style={{ color: 'white', fontSize: 28, fontWeight: 700, margin: '0 0 8px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10 }}><Zap size={28} color="#fbbf24" />Novedades del Sistema</h2>
-            <p style={{ color: '#94a3b8', fontSize: 15, margin: 0 }}>Últimas actualizaciones y mejoras</p>
+        <p style={{ color: 'rgba(255,255,255,0.8)', fontSize: 15, margin: 0 }}>El núcleo inteligente del suministro energético</p>
+      </div>
+      <div style={{ width: '100%', background: 'white', borderRadius: 20, padding: '2.5rem 2rem', boxShadow: '0 10px 40px rgba(0,0,0,0.15)' }}>
+        <h2 style={{ fontSize: 24, fontWeight: 700, color: '#0f172a', textAlign: 'center', margin: '0 0 0.5rem' }}>Iniciar Sesión</h2>
+        <p style={{ fontSize: 14, color: '#64748b', textAlign: 'center', margin: '0 0 2rem' }}>Ingresa tus credenciales para acceder al sistema</p>
+        <form onSubmit={handle} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+          <div>
+            <label style={{ display: 'block', fontSize: 14, fontWeight: 500, color: '#0f172a', marginBottom: 6 }}>Email</label>
+            <input type="email" value={email} onChange={e => setEmail(e.target.value)} style={{ width: '100%', padding: '12px 16px', borderRadius: 10, border: '1px solid #e2e8f0', fontSize: 15, boxSizing: 'border-box', outline: 'none' }} placeholder="demo@enel.com" required />
           </div>
-          <div style={{ position: 'relative', flex: 1, overflow: 'hidden' }}>
-            {NOVEDADES.map((item, i) => {
-              const isActive = i === currentNews;
-              const isPrev = i === (currentNews - 1 + NOVEDADES.length) % NOVEDADES.length;
-              const isNext = i === (currentNews + 1) % NOVEDADES.length;
-              let yOffset = 0; let opacity = 0; let scale = 0.85;
-              if (isActive) { yOffset = 0; opacity = 1; scale = 1; }
-              else if (isPrev) { yOffset = -120; opacity = 0; scale = 0.85; }
-              else if (isNext) { yOffset = 120; opacity = 0.4; scale = 0.9; }
-              else { yOffset = 240; opacity = 0; scale = 0.85; }
-              return (<div key={i} style={{ position: 'absolute', top: '50%', left: 0, right: 0, transform: `translateY(calc(-50% + ${yOffset}px)) scale(${scale})`, opacity: opacity, transition: 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)', pointerEvents: isActive ? 'auto' : 'none' }}>
-                <div style={{ background: 'rgba(255,255,255,0.08)', borderRadius: 16, padding: '24px', border: '1px solid rgba(255,255,255,0.1)' }}>
-                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: 16 }}>
-                    <div style={{ width: 48, height: 48, borderRadius: 12, background: item.bg, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                      <item.icon size={24} color={item.color} />
-                    </div>
-                    <div style={{ flex: 1 }}>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 8 }}>
-                        <h3 style={{ color: 'white', fontSize: 18, fontWeight: 600, margin: 0 }}>{item.title}</h3>
-                        <span style={{ color: '#64748b', fontSize: 12, whiteSpace: 'nowrap', marginLeft: 12 }}>{item.date}</span>
-                      </div>
-                      <p style={{ color: '#94a3b8', fontSize: 14, margin: 0, lineHeight: 1.6 }}>{item.desc}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>);
-            })}
+          <div>
+            <label style={{ display: 'block', fontSize: 14, fontWeight: 500, color: '#0f172a', marginBottom: 6 }}>Contraseña</label>
+            <input type="password" value={pw} onChange={e => setPw(e.target.value)} style={{ width: '100%', padding: '12px 16px', borderRadius: 10, border: '1px solid #e2e8f0', fontSize: 15, boxSizing: 'border-box', outline: 'none' }} placeholder="••••••••" required />
           </div>
-          <div style={{ display: 'flex', justifyContent: 'center', gap: 8, marginTop: 32 }}>
-            {NOVEDADES.map((_, i) => (<button key={i} onClick={() => setCurrentNews(i)} style={{ width: i === currentNews ? 24 : 8, height: 8, borderRadius: 4, border: 'none', background: i === currentNews ? '#3b82f6' : 'rgba(255,255,255,0.2)', cursor: 'pointer', transition: 'all 0.3s', padding: 0 }} />))}
-          </div>
+          {err && <div style={{ background: '#fee2e2', border: '1px solid #fecaca', borderRadius: 8, padding: '10px 14px', fontSize: 13, color: '#dc2626' }}>{err}</div>}
+          <button type="submit" style={{ width: '100%', padding: '14px', borderRadius: 10, border: 'none', background: 'linear-gradient(135deg, #2563eb, #3b82f6)', color: 'white', fontSize: 16, fontWeight: 700, cursor: 'pointer', marginTop: 8 }}>Ingresar al Sistema</button>
+        </form>
+        <p style={{ fontSize: 13, color: '#64748b', textAlign: 'center', marginTop: '1.5rem', marginBottom: 0 }}>¿Problemas para acceder? <a href="mailto:soporte@energycore.cl" style={{ color: '#3b82f6', textDecoration: 'none', fontWeight: 600 }}>Contactar soporte</a></p>
+      </div>
+      <div style={{ width: '100%', background: 'white', borderRadius: 20, padding: '2rem', boxShadow: '0 10px 40px rgba(0,0,0,0.1)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, marginBottom: 6 }}>
+          <Zap size={24} color="#f59e0b" />
+          <h3 style={{ fontSize: 20, fontWeight: 700, color: '#0f172a', margin: 0 }}>Novedades del Sistema</h3>
+        </div>
+        <p style={{ fontSize: 14, color: '#64748b', textAlign: 'center', margin: '0 0 1.5rem' }}>Últimas actualizaciones y mejoras</p>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+          {NOVEDADES.map((item, i) => (<div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: 12, padding: '1rem', background: '#f8fafc', borderRadius: 12, border: '1px solid #e2e8f0' }}>
+            <div style={{ width: 40, height: 40, borderRadius: 10, background: item.bg, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+              <item.icon size={20} color={item.color} />
+            </div>
+            <div style={{ flex: 1 }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 4, gap: 12 }}>
+                <h4 style={{ fontSize: 15, fontWeight: 600, color: '#0f172a', margin: 0 }}>{item.title}</h4>
+                <span style={{ fontSize: 12, color: '#94a3b8', whiteSpace: 'nowrap' }}>{item.date}</span>
+              </div>
+              <p style={{ fontSize: 13, color: '#64748b', margin: 0, lineHeight: 1.5 }}>{item.desc}</p>
+            </div>
+          </div>))}
         </div>
       </div>
-    </div>
-    <div style={{ textAlign: 'center', marginTop: '3rem' }}>
-      <div style={{ marginBottom: 16 }}>
-        <span style={{ color: '#64748b', fontSize: 14 }}>Powered by </span>
-        <a href="https://www.obix.cl" target="_blank" rel="noopener noreferrer"><img src={OBIX_LOGO} alt="Obix" style={{ height: 22, verticalAlign: 'middle', filter: 'brightness(0) invert(0.6)', marginLeft: 4 }} /></a>
-      </div>
-      <p style={{ color: '#64748b', fontSize: 13, margin: 0 }}>EnergyCore v2.0 • Enel Chile</p>
-      <p style={{ color: '#475569', fontSize: 12, margin: '4px 0 0' }}>© 2026 Todos los derechos reservados</p>
     </div>
   </div>);
 }
