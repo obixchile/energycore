@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { LayoutDashboard, FilePlus, Users, Zap, BarChart3, Settings, LogOut, Menu, X } from 'lucide-react';
 
+const ENEL_LOGO = 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Enel_Logo.svg/1024px-Enel_Logo.svg.png';
 const NAV = [
   { key: '/', label: 'Dashboard', Icon: LayoutDashboard },
   { key: '/nueva-propuesta', label: 'Nueva Propuesta', Icon: FilePlus },
@@ -21,24 +22,24 @@ export default function Sidebar({ onLogout }: { onLogout: () => void }) {
       <button onClick={() => setOpen(!open)} className="fixed top-4 left-4 z-50 p-2 bg-gray-900 text-white rounded-lg md:hidden">
         {open ? <X size={18} /> : <Menu size={18} />}
       </button>
-      <aside className={`${open ? 'w-64' : 'w-0 md:w-16'} sidebar-gradient text-white flex flex-col transition-all duration-300 min-h-screen overflow-hidden`}>
-        <div className="p-4 border-b border-gray-700">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-blue-500 rounded-xl flex items-center justify-center text-lg font-bold">E</div>
-            {open && <div><p className="font-bold text-lg">SIMUPRO</p><p className="text-xs text-gray-400">Gestión Eléctrica</p></div>}
+      <aside className={`${open ? 'w-72' : 'w-0 md:w-20'} bg-[#0d1b2a] text-white flex flex-col transition-all duration-300 min-h-screen overflow-hidden border-r border-white/5 font-['Roboto',sans-serif]`}>
+        <div className="p-6 border-b border-white/5">
+          <div className="flex items-center gap-4">
+            <img src={ENEL_LOGO} alt="Enel" style={{ height: 24 }} />
+            {open && <div><p className="font-bold text-lg tracking-tight">EnergyCore</p><p className="text-[10px] text-blue-400 uppercase font-bold tracking-widest">Intelligent Core</p></div>}
           </div>
         </div>
-        <nav className="flex-1 p-3 space-y-1">
+        <nav className="flex-1 p-4 space-y-2">
           {NAV.map(({ key, label, Icon }) => (
-            <button key={key} onClick={() => navigate(key)} className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${location.pathname === key ? 'bg-gradient-to-r from-blue-500 to-cyan-500 text-white' : 'text-gray-300 hover:bg-gray-700'}`}>
-              <Icon size={18} />
-              {open && label}
+            <button key={key} onClick={() => navigate(key)} className={`w-full flex items-center gap-4 px-4 py-3 rounded-xl text-sm transition-all ${location.pathname === key ? 'bg-gradient-to-r from-blue-600 to-blue-400 text-white shadow-lg shadow-blue-900/20' : 'text-gray-400 hover:bg-white/5 hover:text-white'}`}>
+              <Icon size={20} />
+              {open && <span className="font-medium">{label}</span>}
             </button>
           ))}
         </nav>
-        <div className="p-3 border-t border-gray-700">
-          <button onClick={onLogout} className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-gray-300 hover:bg-red-500/10 hover:text-red-400 transition-colors">
-            <LogOut size={18} />
+        <div className="p-4 border-t border-white/5">
+          <button onClick={onLogout} className="w-full flex items-center gap-4 px-4 py-3 rounded-xl text-sm text-gray-400 hover:bg-red-500/10 hover:text-red-400 transition-colors font-medium">
+            <LogOut size={20} />
             {open && 'Cerrar Sesión'}
           </button>
         </div>
