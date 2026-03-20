@@ -23,7 +23,7 @@ export default function Login({ onLogin }: Props) {
     const interval = setInterval(() => {
       setAnimating(true);
       setTimeout(() => {
-        setActiveIdx(prev => (prev + 1) % NOVEDADES.length);
+        setActiveIdx((prev: number) => (prev + 1) % NOVEDADES.length);
         setAnimating(false);
       }, 400);
     }, 3500);

@@ -1,0 +1,10 @@
+{
+    "configurations": [
+        {
+            "type": "chrome",
+            "name": "https://obixchile.github.io/energycore/",
+            "request": "launch",
+            "url": "https://obixchile.github.io/energycore/"
+        }
+    ]
+}
