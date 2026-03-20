@@ -70,7 +70,7 @@ export default function Sidebar({ onLogout }: { onLogout: () => void }) {
           />
           {open && (
             <>
-              <span style={{ color: 'white', fontWeight: 700, fontSize: 18, marginTop: 12, letterSpacing: '-0.5px' }}>EnergyCore</span>
+              <span style={{ color: 'white', fontWeight: 700, fontSize: 18, marginTop: 12, letterSpacing: '-0.5px' }}>⚡ EnergyCore</span>
               <span style={{ color: '#64748b', fontSize: 11, marginTop: 4, lineHeight: 1.4 }}>El núcleo inteligente del<br/>suministro energético</span>
             </>
           )}
