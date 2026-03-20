@@ -9,9 +9,9 @@ const NAV = [
   { key: '/', label: 'Dashboard', Icon: LayoutDashboard },
   { key: '/nueva-propuesta', label: 'Nueva Propuesta', Icon: FilePlus },
   { key: '/clientes', label: 'Clientes', Icon: Users },
-  { key: '/energia', label: 'Energ\u00eda', Icon: Zap },
+  { key: '/energia', label: 'Energía', Icon: Zap },
   { key: '/reportes', label: 'Reportes', Icon: BarChart3 },
-  { key: '/configuracion', label: 'Configuraci\u00f3n', Icon: Settings },
+  { key: '/configuracion', label: 'Configuración', Icon: Settings },
 ];
 
 export default function Sidebar({ onLogout }: { onLogout: () => void }) {
@@ -21,52 +21,154 @@ export default function Sidebar({ onLogout }: { onLogout: () => void }) {
 
   return (
     <>
-      <button onClick={() => setOpen(!open)} className="fixed top-4 left-4 z-50 p-2 bg-gray-900 text-white rounded-lg md:hidden">
+      {/* Mobile toggle */}
+      <button
+        onClick={() => setOpen(!open)}
+        style={{ position: 'fixed', top: 16, left: 16, zIndex: 50, padding: 8, background: '#0f172a', color: 'white', border: 'none', borderRadius: 8, cursor: 'pointer', display: 'none' }}
+        className="md:hidden"
+      >
         {open ? <X size={18} /> : <Menu size={18} />}
       </button>
 
-      <aside className={`${open ? 'w-72' : 'w-0 md:w-20'} bg-[#0d1b2a] text-white flex flex-col transition-all duration-300 min-h-screen overflow-hidden border-r border-white/5`}>
-        <div className="px-4 py-5 border-b border-white/10">
-          <img src={ENEL_LOGO} alt="Enel Chile" className="h-9 w-auto object-contain" style={{ filter: 'brightness(0) invert(1)' }} />
+      <aside style={{
+        width: open ? 240 : 72,
+        background: '#0d1b2a',
+        color: 'white',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        transition: 'width 0.3s',
+        minHeight: '100vh',
+        overflow: 'hidden',
+        borderRight: '1px solid rgba(255,255,255,0.05)',
+        flexShrink: 0,
+      }}>
+
+        {/* Header: Logo centered */}
+        <div style={{
+          width: '100%',
+          padding: open ? '28px 20px 20px' : '28px 8px 20px',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          textAlign: 'center',
+          borderBottom: '1px solid rgba(255,255,255,0.07)',
+          marginBottom: 8,
+        }}>
+          <img
+            src={ENEL_LOGO}
+            alt="Enel Chile"
+            style={{
+              height: open ? 36 : 24,
+              maxWidth: open ? 140 : 48,
+              objectFit: 'contain',
+              filter: 'brightness(0) invert(1)',
+              display: 'block',
+              margin: '0 auto',
+              transition: 'all 0.3s',
+            }}
+          />
           {open && (
-            <div className="mt-3">
-              <p className="text-white font-bold text-sm">EnergyCore</p>
-              <p className="text-gray-400 text-xs mt-0.5">El n\u00facleo inteligente del suministro energ\u00e9tico</p>
-            </div>
+            <>
+              <span style={{ color: 'white', fontWeight: 700, fontSize: 18, marginTop: 12, letterSpacing: '-0.5px' }}>EnergyCore</span>
+              <span style={{ color: '#64748b', fontSize: 11, marginTop: 4, lineHeight: 1.4 }}>El núcleo inteligente del<br/>suministro energético</span>
+            </>
           )}
         </div>
 
-        <nav className="flex-1 px-3 py-4 space-y-1">
-          {NAV.map(({ key, label, Icon }) => (
-            <button
-              key={key}
-              onClick={() => navigate(key)}
-              className={`w-full flex items-center gap-4 px-4 py-3 rounded-xl text-sm transition-all ${
-                location.pathname === key
-                  ? 'bg-gradient-to-r from-blue-600 to-blue-400 text-white shadow-lg shadow-blue-900/20'
-                  : 'text-gray-400 hover:bg-white/5 hover:text-white'
-              }`}
-            >
-              <Icon size={20} />
-              {open && <span>{label}</span>}
-            </button>
-          ))}
+        {/* Nav items */}
+        <nav style={{ width: '100%', padding: '0 8px', flex: 1 }}>
+          {NAV.map(({ key, label, Icon }) => {
+            const active = location.pathname === key;
+            return (
+              <button
+                key={key}
+                onClick={() => navigate(key)}
+                style={{
+                  width: '100%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: open ? 'flex-start' : 'center',
+                  gap: 12,
+                  padding: open ? '11px 16px' : '11px 0',
+                  borderRadius: 12,
+                  border: 'none',
+                  cursor: 'pointer',
+                  marginBottom: 4,
+                  fontSize: 14,
+                  fontWeight: active ? 600 : 400,
+                  background: active ? 'linear-gradient(135deg, #2563eb, #3b82f6)' : 'transparent',
+                  color: active ? 'white' : '#94a3b8',
+                  transition: 'all 0.2s',
+                  boxShadow: active ? '0 4px 15px rgba(59,130,246,0.3)' : 'none',
+                }}
+              >
+                <Icon size={18} style={{ flexShrink: 0 }} />
+                {open && <span>{label}</span>}
+              </button>
+            );
+          })}
         </nav>
 
-        <div className="px-3 py-4 border-t border-white/10">
+        {/* Bottom: logout + Obix */}
+        <div style={{
+          width: '100%',
+          padding: open ? '16px 16px 24px' : '16px 8px 24px',
+          borderTop: '1px solid rgba(255,255,255,0.07)',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: 16,
+        }}>
           <button
             onClick={onLogout}
-            className="w-full flex items-center gap-4 px-4 py-3 rounded-xl text-sm text-red-400 hover:bg-red-500/10 transition-all"
+            style={{
+              width: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: open ? 'flex-start' : 'center',
+              gap: 12,
+              padding: open ? '10px 16px' : '10px 0',
+              borderRadius: 12,
+              border: 'none',
+              cursor: 'pointer',
+              background: 'transparent',
+              color: '#64748b',
+              fontSize: 14,
+            }}
           >
-            <LogOut size={20} />
-            {open && <span>Cerrar Sesi\u00f3n</span>}
+            <LogOut size={18} />
+            {open && <span>Cerrar Sesión</span>}
           </button>
+
+          {/* Obix logo footer */}
           {open && (
-            <div className="flex justify-center mt-3">
-              <a href="https://www.obix.cl/" target="_blank" rel="noopener noreferrer">
-                <img src={OBIX_LOGO} alt="Obix" className="h-4 w-auto opacity-40 hover:opacity-100 transition-opacity" style={{ filter: 'brightness(0) invert(1)' }} />
-              </a>
-            </div>
+            <a
+              href="https://www.obix.cl"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                gap: 6,
+                textDecoration: 'none',
+                opacity: 0.7,
+                transition: 'opacity 0.2s',
+              }}
+            >
+              <span style={{ color: '#475569', fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Powered by</span>
+              <img
+                src={OBIX_LOGO}
+                alt="Obix"
+                style={{ height: 28, objectFit: 'contain', filter: 'brightness(0) invert(0.7)' }}
+              />
+            </a>
+          )}
+          {!open && (
+            <a href="https://www.obix.cl" target="_blank" rel="noopener noreferrer">
+              <img src={OBIX_LOGO} alt="Obix" style={{ height: 20, filter: 'brightness(0) invert(0.5)' }} />
+            </a>
           )}
         </div>
       </aside>
