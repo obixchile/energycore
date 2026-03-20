@@ -45,7 +45,7 @@ export default function Login({ onLogin }: Props) {
 , fontFamily: "'Roboto',sans-serif", padding: '2rem 1rem' }}>
       <img src={ENEL_LOGO} alt="Enel" style={{ height: 76, filter: 'brightness(0) invert(1)', marginBottom: '2rem' }} />
       <div style={{ width: '100%', maxWidth: 480, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.5rem' }}>
-        <div style={{ width: '100%', style={{ background: 'rgba(255,255,255,0.07)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: 20, padding: '1.5rem 2rem', textAlign: 'center', boxShadow: '0 4px 16px rgba(0,0,0,0.3)' }}, textAlign: 'center' }}>
+<div style={{ width: '100%', background: 'rgba(255,255,255,0.07)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: 20, padding: '1.5rem 2rem', textAlign: 'center', boxShadow: '0 4px 16px rgba(0,0,0,0.3)' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12, marginBottom: 8 }}>
             <div style={{ width: 44, height: 44, borderRadius: 12, background: 'linear-gradient(135deg,#2563eb,#3b82f6)', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 14px rgba(59,130,246,0.4)' }}>
               <Zap size={24} color="white" fill="white" />
