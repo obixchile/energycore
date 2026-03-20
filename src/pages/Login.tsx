@@ -43,13 +43,13 @@ export default function Login({ onLogin }: Props) {
         alignItems: 'center',
         textAlign: 'center',
       }}>
-        {/* Enel Logo centered */}
+        {/* Enel Logo - bigger */}
         <img
           src={ENEL_LOGO}
           alt="Enel"
-          style={{ height: 48, marginBottom: 24, filter: 'brightness(0) invert(1)', display: 'block' }}
+          style={{ height: 72, marginBottom: 20, filter: 'brightness(0) invert(1)', display: 'block' }}
         />
-        <h1 style={{ color: 'white', fontSize: 38, fontWeight: 700, margin: '0 0 6px', letterSpacing: '-1px' }}>EnergyCore</h1>
+        <h1 style={{ color: 'white', fontSize: 38, fontWeight: 700, margin: '0 0 6px', letterSpacing: '-1px' }}>⚡ EnergyCore</h1>
         <p style={{ color: '#94a3b8', fontSize: 15, margin: '0 0 36px' }}>
           El núcleo inteligente del suministro energético
         </p>
@@ -80,9 +80,9 @@ export default function Login({ onLogin }: Props) {
           {err && <p style={{ color: '#f87171', fontSize: 13, margin: '0 0 12px' }}>{err}</p>}
           <button
             type="submit"
-            style={{ width: '100%', padding: '16px', borderRadius: 12, border: 'none', background: 'linear-gradient(135deg, #2563eb, #3b82f6)', color: 'white', fontSize: 16, fontWeight: 600, cursor: 'pointer', marginTop: 8 }}
+            style={{ width: '100%', padding: '16px', borderRadius: 12, border: 'none', background: 'linear-gradient(135deg, #2563eb, #3b82f6)', color: 'white', fontSize: 17, fontWeight: 800, cursor: 'pointer', marginTop: 8, letterSpacing: '0.02em' }}
           >
-            Entrar al Núcleo
+            Entrar
           </button>
         </form>
 
